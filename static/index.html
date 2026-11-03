@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Placement Cell - B.Tech Career Analytics Portal</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Chart.js for data visualization -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-wrapper">
+          <div class="brand-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+          <span class="brand-title">Placement Cell</span>
+        </div>
+        <button class="sidebar-close" id="sidebarCloseBtn" aria-label="Close sidebar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <nav class="sidebar-menu">
+        <button class="nav-item active" data-page="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-page="students">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Student Management</span>
+        </button>
+        <button class="nav-item" data-page="placements">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          <span>Placement Records</span>
+        </button>
+        <button class="nav-item" data-page="manage">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          <span>Add / Edit Details</span>
+        </button>
+        <button class="nav-item" data-page="departments">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
+          <span>Department Analytics</span>
+        </button>
+        <button class="nav-item" data-page="packages">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          <span>Package Analytics</span>
+        </button>
+        <button class="nav-item" data-page="skills">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg>
+          <span>Skill Insights</span>
+        </button>
+        <button class="nav-item" data-page="settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span>Settings</span>
+        </button>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="main-wrapper">
+      <!-- Header with Current Opened Page Name in the Middle -->
+      <header class="app-header">
+        <div class="header-left">
+          <button class="sidebar-toggle" id="sidebarToggleBtn" aria-label="Open sidebar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+          </button>
+          <div class="header-brand">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <span class="hidden sm:inline">Placement Cell</span>
+          </div>
+        </div>
+
+        <!-- Middle: Current Opened Page Name -->
+        <div class="header-middle">
+          <h1 class="header-page-title" id="headerPageTitle">Dashboard</h1>
+        </div>
+
+        <div class="header-right">
+          <div class="badge-term">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg>
+            <span>Batch: 2018–2026</span>
+          </div>
+          <button class="btn-primary" id="quickAddSampleBtn" title="Add 35 sample students and placement offers to observe live graph changes" style="font-size:12px; padding:6px 14px; gap:6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span>+ Add Sample Data</span>
+          </button>
+          <button class="btn-refresh" id="refreshBtn" title="Refresh data">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+            <span class="hidden sm:inline">Refresh</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Pages Container -->
+      <main class="page-container">
+        <!-- 1. DASHBOARD VIEW -->
+        <section class="page-view active" id="view-dashboard">
+          <div class="card card-header-clean">
+            <h2 class="card-title">Placement Performance Dashboard</h2>
+            <p class="card-subtitle">Calculated for college placement performance across batches</p>
+          </div>
+
+          <!-- 5 Metric Cards -->
+          <div class="stat-cards-grid" id="dashboardMetrics">
+            <div class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-card-title">Total Students</span>
+                <div class="stat-card-icon navy"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+              </div>
+              <div class="stat-card-value" id="dashTotalStudents">--</div>
+              <span class="stat-card-subtext">Enrolled across batches</span>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-card-title">Eligible Students</span>
+                <div class="stat-card-icon blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
+              </div>
+              <div class="stat-card-value" id="dashEligibleStudents">--</div>
+              <span class="stat-card-subtext" id="dashEligiblePct">Meeting placement criteria</span>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-card-title">Unique Placed</span>
+                <div class="stat-card-icon emerald"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+              </div>
+              <div class="stat-card-value" id="dashUniquePlaced">--</div>
+              <span class="stat-card-subtext" id="dashTotalOffers">Total offers issued</span>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-card-title">Placement Rate</span>
+                <div class="stat-card-icon indigo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" x2="5" y1="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></div>
+              </div>
+              <div class="stat-card-value"><span id="dashPlacementRate">--</span><span class="stat-card-unit">%</span></div>
+              <span class="stat-card-subtext">(Placed Eligible / Eligible) &times; 100</span>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-card-title">Average Package</span>
+                <div class="stat-card-icon amber"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12"/><path d="M6 8h12"/><path d="m6 13 8.5 8"/><path d="M6 13h3a4 4 0 0 0 0-8"/></svg></div>
+              </div>
+              <div class="stat-card-value"><span id="dashAvgPackage">--</span><span class="stat-card-unit">LPA</span></div>
+              <span class="stat-card-subtext">Valid placement offers</span>
+            </div>
+          </div>
+
+          <!-- Charts Grid -->
+          <div class="charts-grid">
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div>
+                  <h3 class="card-title" style="font-size:14px;">Department Placement Overview</h3>
+                  <p class="card-subtitle">Placement rate comparison across departments</p>
+                </div>
+                <span class="chart-badge">Rate %</span>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chartDashboardDepts"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div>
+                  <h3 class="card-title" style="font-size:14px;">Most Common Skills</h3>
+                  <p class="card-subtitle">Recorded across student profiles</p>
+                </div>
+                <span class="chart-badge emerald">Frequency</span>
+              </div>
+              <div id="dashboardSkillsList" style="display:flex; flex-direction:column; gap:12px; padding-top:6px;">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Placements Table -->
+          <div class="table-card">
+            <div class="table-header-box">
+              <div>
+                <h3 class="card-title" style="font-size:14px;">Recent Placement Records</h3>
+                <p class="card-subtitle">Latest campus offers recorded in database</p>
+              </div>
+              <button class="btn-primary" style="padding:6px 12px; font-size:11px;" onclick="navigateToPage('placements')">
+                View All Placements
+              </button>
+            </div>
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Roll No</th>
+                    <th>Student Name</th>
+                    <th>Department</th>
+                    <th>Company</th>
+                    <th>Job Role</th>
+                    <th>Package (LPA)</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="dashRecentPlacementsBody">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. STUDENT MANAGEMENT VIEW -->
+        <section class="page-view" id="view-students">
+          <div class="card">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+              <div>
+                <h2 class="card-title">Student Directory & Records</h2>
+                <p class="card-subtitle">Manage student profiles, technical skills, and placement eligibility</p>
+              </div>
+              <button class="btn-primary" id="openAddStudentBtn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                <span>Add Student</span>
+              </button>
+            </div>
+
+            <div class="filter-bar">
+              <input type="text" id="studentSearchInput" class="form-input" placeholder="Search roll no or name..." style="min-width:200px;">
+              <select id="studentDeptFilter" class="form-select">
+                <option value="">All Departments</option>
+              </select>
+              <select id="studentSubBranchFilter" class="form-select" disabled>
+                <option value="">All Sub-Branches</option>
+              </select>
+              <select id="studentGradYearFilter" class="form-select">
+                <option value="">All Batches (2018–2026)</option>
+              </select>
+              <select id="studentEligibleFilter" class="form-select">
+                <option value="">All Eligibility</option>
+                <option value="true">Eligible Only</option>
+                <option value="false">Ineligible Only</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Roll No</th>
+                    <th>Student Name</th>
+                    <th>Department & Specialization</th>
+                    <th>Grad Year</th>
+                    <th>Skills</th>
+                    <th>Eligibility</th>
+                    <th>Placement Status</th>
+                    <th style="text-align:right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="studentsTableBody">
+                  <!-- Dynamic rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. PLACEMENT RECORDS VIEW -->
+        <section class="page-view" id="view-placements">
+          <div class="card">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+              <div>
+                <h2 class="card-title">Placement Offer Records</h2>
+                <p class="card-subtitle">Track campus placement offers, recruiters, and salary packages</p>
+              </div>
+              <button class="btn-primary" id="openAddPlacementBtn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                <span>Add Placement Offer</span>
+              </button>
+            </div>
+
+            <div class="filter-bar">
+              <input type="text" id="placementSearchInput" class="form-input" placeholder="Search roll no or company..." style="min-width:180px;">
+              <select id="placementDeptFilter" class="form-select">
+                <option value="">All Departments</option>
+              </select>
+              <select id="placementSubBranchFilter" class="form-select" disabled>
+                <option value="">All Sub-Branches</option>
+              </select>
+              <select id="placementCompanyFilter" class="form-select">
+                <option value="">All Companies</option>
+              </select>
+              <select id="placementYearFilter" class="form-select">
+                <option value="">All Offer Years (2018–2026)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Roll No</th>
+                    <th>Student Name</th>
+                    <th>Department & Branch</th>
+                    <th>Company</th>
+                    <th>Role</th>
+                    <th>Package (LPA)</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th style="text-align:right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="placementsTableBody">
+                  <!-- Dynamic rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- MANAGE VIEW (ADD / EDIT DETAILS) -->
+        <section class="page-view" id="view-manage">
+          <div class="card">
+            <h2 class="card-title">Add & Edit Details</h2>
+            <p class="card-subtitle">Directly add new student profiles or placement records, or select existing entries to edit details</p>
+          </div>
+
+          <div class="manage-tabs-container">
+            <button class="manage-tab-btn active" data-tab="manage-students">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              <span>Student Details Form</span>
+            </button>
+            <button class="manage-tab-btn" data-tab="manage-placements">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              <span>Placement Offer Form</span>
+            </button>
+          </div>
+
+          <!-- Tab Pane 1: Student Management Form -->
+          <div class="manage-tab-pane active" id="pane-manage-students">
+            <div class="card" style="margin-bottom:20px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid #f1f5f9;">
+                <div>
+                  <h3 class="card-title" id="manageStudentFormTitle" style="font-size:15px;">Add New Student</h3>
+                  <p class="card-subtitle">Fill in the student academic and skill credentials</p>
+                </div>
+                <div style="display:flex; gap:10px; align-items:center;">
+                  <button type="button" class="btn-secondary" id="btnManageNewStudent" style="font-size:12px; padding:6px 12px;">+ Add Fresh Student</button>
+                </div>
+              </div>
+
+              <form id="manageStudentForm">
+                <input type="hidden" id="manageStudentId" value="">
+                
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px;">
+                  <div class="form-group">
+                    <label class="form-label" for="manageStudentRoll">Roll Number *</label>
+                    <input type="text" class="form-input" id="manageStudentRoll" placeholder="e.g. 22CS045" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="manageStudentName">Full Name *</label>
+                    <input type="text" class="form-input" id="manageStudentName" placeholder="e.g. Rahul Sharma" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="manageStudentDept">Department *</label>
+                    <select class="form-input" id="manageStudentDept" required></select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="manageStudentSubBranch">Sub-Branch / Specialization</label>
+                    <select class="form-input" id="manageStudentSubBranch"></select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="manageStudentGradYear">Graduation Year *</label>
+                    <select class="form-input" id="manageStudentGradYear" required></select>
+                  </div>
+                  <div class="form-group" style="display:flex; align-items:center; gap:8px; padding-top:24px;">
+                    <input type="checkbox" id="manageStudentEligible" checked style="width:18px; height:18px; cursor:pointer;">
+                    <label for="manageStudentEligible" class="form-label" style="cursor:pointer; margin:0;">Eligible for Campus Placements</label>
+                  </div>
+                </div>
+
+                <div class="form-group" style="margin-top:16px;">
+                  <label class="form-label" for="manageStudentSkills">Technical Skills (comma separated)</label>
+                  <input type="text" class="form-input" id="manageStudentSkills" placeholder="e.g. Python, SQL, Machine Learning, React">
+                  <div style="margin-top:8px;">
+                    <span style="font-size:11px; color:#64748b;">Quick add skill tags:</span>
+                    <div class="skill-chips" id="manageStudentSkillChips">
+                      <span class="skill-chip" data-skill="Python">+ Python</span>
+                      <span class="skill-chip" data-skill="Java">+ Java</span>
+                      <span class="skill-chip" data-skill="C++">+ C++</span>
+                      <span class="skill-chip" data-skill="SQL">+ SQL</span>
+                      <span class="skill-chip" data-skill="Machine Learning">+ Machine Learning</span>
+                      <span class="skill-chip" data-skill="React">+ React</span>
+                      <span class="skill-chip" data-skill="Node.js">+ Node.js</span>
+                      <span class="skill-chip" data-skill="AWS">+ AWS</span>
+                      <span class="skill-chip" data-skill="Docker">+ Docker</span>
+                      <span class="skill-chip" data-skill="Data Structures">+ Data Structures</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="display:flex; gap:12px; margin-top:20px; justify-content:flex-end;">
+                  <button type="button" class="btn-secondary" id="btnManageResetStudent">Clear Form</button>
+                  <button type="submit" class="btn-primary" id="btnManageSaveStudent">Save Student Details</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Recent Students Mini Table -->
+            <div class="table-card">
+              <div class="table-header-box">
+                <div>
+                  <h3 class="card-title" style="font-size:14px;">Recent Student Records</h3>
+                  <p class="card-subtitle">Click Edit to load any record into the form above</p>
+                </div>
+                <button class="btn-secondary" style="font-size:11px; padding:5px 12px;" onclick="navigateToPage('students')">View All Students &rarr;</button>
+              </div>
+              <div class="table-wrapper">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Roll No</th>
+                      <th>Student Name</th>
+                      <th>Department & Branch</th>
+                      <th>Batch</th>
+                      <th>Status</th>
+                      <th style="text-align:right;">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="manageRecentStudentsBody">
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab Pane 2: Placement Details Form -->
+          <div class="manage-tab-pane" id="pane-manage-placements">
+            <div class="card" style="margin-bottom:20px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid #f1f5f9;">
+                <div>
+                  <h3 class="card-title" id="managePlacementFormTitle" style="font-size:15px;">Add New Placement Offer</h3>
+                  <p class="card-subtitle">Record campus job placement offers and packages</p>
+                </div>
+                <div style="display:flex; gap:10px; align-items:center;">
+                  <button type="button" class="btn-secondary" id="btnManageNewPlacement" style="font-size:12px; padding:6px 12px;">+ Add Fresh Offer</button>
+                </div>
+              </div>
+
+              <form id="managePlacementForm">
+                <input type="hidden" id="managePlacementId" value="">
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px;">
+                  <div class="form-group">
+                    <label class="form-label" for="managePlacementRoll">Student Roll Number *</label>
+                    <input type="text" class="form-input" id="managePlacementRoll" placeholder="e.g. 22CS045" required>
+                    <span style="font-size:11px; color:#64748b; margin-top:3px; display:block;">Must match an existing student roll number</span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="managePlacementCompany">Hiring Company *</label>
+                    <input type="text" class="form-input" id="managePlacementCompany" placeholder="e.g. Google, Microsoft, TCS" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="managePlacementRole">Job Role *</label>
+                    <input type="text" class="form-input" id="managePlacementRole" placeholder="e.g. Software Engineer" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="managePlacementPackage">Package (LPA) *</label>
+                    <input type="number" step="0.01" min="0.5" max="200" class="form-input" id="managePlacementPackage" placeholder="e.g. 14.50" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="managePlacementDate">Placement Date *</label>
+                    <input type="date" class="form-input" id="managePlacementDate" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="managePlacementStatus">Offer Status *</label>
+                    <select class="form-input" id="managePlacementStatus" required>
+                      <option value="Placed" selected>Placed</option>
+                      <option value="Accepted">Accepted</option>
+                      <option value="Offered">Offered</option>
+                      <option value="Pending">Pending</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div style="display:flex; gap:12px; margin-top:20px; justify-content:flex-end;">
+                  <button type="button" class="btn-secondary" id="btnManageResetPlacement">Clear Form</button>
+                  <button type="submit" class="btn-primary" id="btnManageSavePlacement">Save Placement Offer</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Recent Placements Mini Table -->
+            <div class="table-card">
+              <div class="table-header-box">
+                <div>
+                  <h3 class="card-title" style="font-size:14px;">Recent Placement Records</h3>
+                  <p class="card-subtitle">Click Edit to load any offer into the form above</p>
+                </div>
+                <button class="btn-secondary" style="font-size:11px; padding:5px 12px;" onclick="navigateToPage('placements')">View All Placements &rarr;</button>
+              </div>
+              <div class="table-wrapper">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Roll No</th>
+                      <th>Student Name</th>
+                      <th>Company</th>
+                      <th>Role</th>
+                      <th>Package (LPA)</th>
+                      <th>Status</th>
+                      <th style="text-align:right;">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="manageRecentPlacementsBody">
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. DEPARTMENT ANALYTICS VIEW -->
+        <section class="page-view" id="view-departments">
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
+              <div>
+                <h2 class="card-title">Department & Sub-Branch Placement Analytics</h2>
+                <p class="card-subtitle">Comparative outcomes, placement ratios, and specialization metrics across engineering disciplines</p>
+              </div>
+              <a href="/api/reports/charts/department.png" target="_blank" class="btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 12px; text-decoration: none; border-radius: 6px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span>Export Matplotlib Chart</span>
+              </a>
+            </div>
+
+            <div class="filter-bar">
+              <div class="filter-group">
+                <label class="filter-label">Select Department</label>
+                <select id="deptAnalyticsDeptSelect" class="form-select">
+                  <option value="">All Departments Overview</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label class="filter-label">Sub-Branch / Specialization</label>
+                <select id="deptAnalyticsSubBranchSelect" class="form-select" disabled>
+                  <option value="">All Sub-Branches</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label class="filter-label">Graduation Batch</label>
+                <select id="deptAnalyticsGradYearSelect" class="form-select">
+                  <option value="">All Batches (2018–2026)</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label class="filter-label">Offer Year</label>
+                <select id="deptAnalyticsOfferYearSelect" class="form-select">
+                  <option value="">All Offer Years (2018–2026)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="charts-grid">
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div>
+                  <h3 class="card-title" style="font-size:14px;" id="deptChartRateTitle">Placement Rates by Department</h3>
+                  <p class="card-subtitle">(Unique Eligible Placed / Total Eligible) &times; 100</p>
+                </div>
+                <span class="chart-badge">Rate %</span>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chartDeptRate"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div>
+                  <h3 class="card-title" style="font-size:14px;" id="deptChartCompareTitle">Eligible vs Placed Students</h3>
+                  <p class="card-subtitle">Cohort counts compared</p>
+                </div>
+                <span class="chart-badge emerald">Counts</span>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chartDeptCompare"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-header-box">
+              <div>
+                <h3 class="card-title" style="font-size:14px;">Department Performance Statistics Table</h3>
+                <p class="card-subtitle">Calculated using statistical aggregation from current records</p>
+              </div>
+            </div>
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Department / Sub-Branch</th>
+                    <th style="text-align:center;">Total Students</th>
+                    <th style="text-align:center;">Eligible</th>
+                    <th style="text-align:center;">Unique Placed</th>
+                    <th style="text-align:center;">Placement Rate</th>
+                    <th style="text-align:center;">Total Offers</th>
+                    <th style="text-align:right;">Avg Package</th>
+                    <th style="text-align:right;">Top Package</th>
+                  </tr>
+                </thead>
+                <tbody id="deptAnalyticsTableBody">
+                  <!-- Dynamic rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. PACKAGE ANALYTICS VIEW -->
+        <section class="page-view" id="view-packages">
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
+              <div>
+                <h2 class="card-title">Salary Package Analytics (LPA)</h2>
+                <p class="card-subtitle">NumPy-powered compensation analysis, median and mean measures, and salary distribution tiers</p>
+              </div>
+              <a href="/api/reports/charts/package.png" target="_blank" class="btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 12px; text-decoration: none; border-radius: 6px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span>Export Matplotlib Chart</span>
+              </a>
+            </div>
+
+            <div class="filter-bar">
+              <div class="filter-group">
+                <label class="filter-label">Department</label>
+                <select id="pkgDeptFilter" class="form-select">
+                  <option value="">All Departments</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label class="filter-label">Sub-Branch</label>
+                <select id="pkgSubBranchFilter" class="form-select" disabled>
+                  <option value="">All Sub-Branches</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label class="filter-label">Graduation Batch</label>
+                <select id="pkgGradYearFilter" class="form-select">
+                  <option value="">All Batches (2018–2026)</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label class="filter-label">Offer Year</label>
+                <select id="pkgOfferYearFilter" class="form-select">
+                  <option value="">All Offer Years (2018–2026)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Package Stat Cards (NumPy calculations) -->
+          <div class="stat-cards-grid">
+            <div class="stat-card">
+              <span class="stat-card-title">Average Package</span>
+              <div class="stat-card-value"><span id="pkgAvgValue">--</span><span class="stat-card-unit">LPA</span></div>
+              <span class="stat-card-subtext" id="pkgAvgSubtext">Mean of valid offers (NumPy)</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-card-title">Median Package</span>
+              <div class="stat-card-value"><span id="pkgMedianValue">--</span><span class="stat-card-unit">LPA</span></div>
+              <span class="stat-card-subtext">50th percentile (NumPy)</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-card-title">Highest Package</span>
+              <div class="stat-card-value"><span id="pkgHighestValue">--</span><span class="stat-card-unit">LPA</span></div>
+              <span class="stat-card-subtext">Peak recorded offer</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-card-title">Lowest Package</span>
+              <div class="stat-card-value"><span id="pkgLowestValue">--</span><span class="stat-card-unit">LPA</span></div>
+              <span class="stat-card-subtext">Minimum recorded offer</span>
+            </div>
+          </div>
+
+          <div class="charts-grid">
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div>
+                  <h3 class="card-title" style="font-size:14px;">Salary Package Distribution (Histogram)</h3>
+                  <p class="card-subtitle">Number of offers in each salary tier (LPA)</p>
+                </div>
+                <span class="chart-badge emerald">Distribution</span>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chartPkgHistogram"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div>
+                  <h3 class="card-title" style="font-size:14px;">Department Package Comparison</h3>
+                  <p class="card-subtitle">Mean and median compensation across disciplines</p>
+                </div>
+                <span class="chart-badge">Comparison</span>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chartPkgDeptCompare"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-header-box">
+              <div>
+                <h3 class="card-title" style="font-size:14px;">Salary Range Frequency Table</h3>
+                <p class="card-subtitle">Structured distribution of campus placement compensation</p>
+              </div>
+            </div>
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Salary Tier Bracket</th>
+                    <th style="text-align:center;">Offers Count</th>
+                    <th style="text-align:center;">Percentage of Offers</th>
+                  </tr>
+                </thead>
+                <tbody id="pkgRangeTableBody">
+                  <!-- Dynamic rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. SKILL INSIGHTS VIEW -->
+        <section class="page-view" id="view-skills">
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
+              <div>
+                <h2 class="card-title">Student Skill Analysis & Insights</h2>
+                <p class="card-subtitle">Skill frequencies, department distributions, and placement profile associations</p>
+              </div>
+              <a href="/api/reports/charts/skills.png" target="_blank" class="btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 12px; text-decoration: none; border-radius: 6px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span>Export Matplotlib Chart</span>
+              </a>
+            </div>
+
+            <div class="filter-bar">
+              <div class="filter-group">
+                <label class="filter-label">Graduation Batch</label>
+                <select id="skillGradYearFilter" class="form-select">
+                  <option value="">All Graduation Batches (2018–2026)</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label class="filter-label">Department</label>
+                <select id="skillDeptFilter" class="form-select">
+                  <option value="">All Departments</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label class="filter-label">Sub-Branch</label>
+                <select id="skillSubBranchFilter" class="form-select" disabled>
+                  <option value="">All Sub-Branches</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Descriptive Statistics Notice in Simple English -->
+          <div class="notice-banner">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            <div>
+              <strong>Information Notice:</strong> The skill distributions shown below are calculated based on available student profiles and placement outcomes. These figures represent overall trends and do not imply a direct cause-and-effect relationship between any specific skill and placement success.
+            </div>
+          </div>
+
+          <div class="charts-grid">
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div>
+                  <h3 class="card-title" style="font-size:14px;">Most In-Demand Recorded Skills</h3>
+                  <p class="card-subtitle">Top skills recorded across student profiles (deduplicated)</p>
+                </div>
+                <span class="chart-badge">Frequency</span>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chartSkillsFrequency"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div>
+                  <h3 class="card-title" style="font-size:14px;">Skill Incidence: Placed vs Unplaced Cohort</h3>
+                  <p class="card-subtitle">Percentage frequency within each cohort</p>
+                </div>
+                <span class="chart-badge emerald">Comparative %</span>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chartSkillsCompare"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-header-box">
+              <div>
+                <h3 class="card-title" style="font-size:14px;">Recorded Skills Breakdown by Cohort</h3>
+                <p class="card-subtitle">Comparing skill occurrences between placed and unplaced students</p>
+              </div>
+            </div>
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Skill Name</th>
+                    <th style="text-align:center;">Total Students</th>
+                    <th style="text-align:center;">Placed Students</th>
+                    <th style="text-align:center;">Placed %</th>
+                    <th style="text-align:center;">Unplaced Students</th>
+                    <th style="text-align:center;">Unplaced %</th>
+                  </tr>
+                </thead>
+                <tbody id="skillsTableBody">
+                  <!-- Dynamic rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. SETTINGS VIEW -->
+        <section class="page-view" id="view-settings">
+          <div class="card">
+            <h2 class="card-title">Portal Settings & Configuration</h2>
+            <p class="card-subtitle">Configure academic terms, placement eligibility thresholds, and branch mappings</p>
+          </div>
+
+          <div class="card" style="display:flex; flex-direction:column; gap:20px;">
+            <div>
+              <h3 class="card-title" style="font-size:14px; margin-bottom:12px;">Active Academic Disciplines & Specializations</h3>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:14px;">
+                <div style="padding:14px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px;">
+                  <strong style="font-size:13px; color:#0f172a;">Computer Science & Engineering (CSE)</strong>
+                  <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;">
+                    <span class="badge-status subbranch">AIML</span>
+                    <span class="badge-status subbranch">AIDS</span>
+                    <span class="badge-status subbranch">DS</span>
+                    <span class="badge-status subbranch">CS</span>
+                    <span class="badge-status subbranch">IT</span>
+                  </div>
+                </div>
+
+                <div style="padding:14px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px;">
+                  <strong style="font-size:13px; color:#0f172a;">Electronics & Communication (ECE)</strong>
+                  <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;">
+                    <span class="badge-status subbranch">Core ECE</span>
+                    <span class="badge-status subbranch">VLSI</span>
+                    <span class="badge-status subbranch">Embedded</span>
+                    <span class="badge-status subbranch">Telecom</span>
+                  </div>
+                </div>
+
+                <div style="padding:14px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px;">
+                  <strong style="font-size:13px; color:#0f172a;">Other Engineering Disciplines</strong>
+                  <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;">
+                    <span class="badge-status subbranch">Electrical (EEE)</span>
+                    <span class="badge-status subbranch">Mechanical (ME)</span>
+                    <span class="badge-status subbranch">Civil (CE)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="padding-top:16px; border-top:1px solid #f1f5f9;">
+              <h3 class="card-title" style="font-size:14px; margin-bottom:8px;">Supported Batches</h3>
+              <p style="font-size:12px; color:#64748b;">Academic batches supported across all database queries: <strong>2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026</strong>.</p>
+            </div>
+          </div>
+
+          <!-- Sample Data & Demo Management -->
+          <div class="card" style="display:flex; flex-direction:column; gap:16px; margin-top:20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+              <div>
+                <h3 class="card-title" style="font-size:15px; margin-bottom:4px;">Sample Data & Demo Dataset</h3>
+                <p class="card-subtitle">Generate realistic fictional sample data for 275+ students and 240+ placement offers across 9 batches</p>
+              </div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button class="btn-primary" id="btnAddSampleBatch" style="background:#0284c7;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  <span>+ Add Sample Batch (+35 Records)</span>
+                </button>
+                <button class="btn-primary" id="btnSeedSampleData">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+                  <span>Re-seed Sample Data</span>
+                </button>
+                <button class="btn-secondary" id="btnClearData" style="color:#ef4444; border-color:#fca5a5;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                  <span>Clear All Records</span>
+                </button>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px; padding:14px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px;">
+              <div>
+                <span style="font-size:11px; text-transform:uppercase; color:#64748b; font-weight:700;">Sample Students CSV</span>
+                <p style="font-size:12px; color:#0f172a; margin-top:3px;">275 students &bull; <code>data/sample_students.csv</code></p>
+                <a href="/api/admin/sample-files/sample_students.csv" download class="btn-secondary" style="display:inline-block; margin-top:8px; font-size:11px; padding:5px 12px; text-decoration:none;">Download Students CSV</a>
+              </div>
+              <div>
+                <span style="font-size:11px; text-transform:uppercase; color:#64748b; font-weight:700;">Sample Placements CSV</span>
+                <p style="font-size:12px; color:#0f172a; margin-top:3px;">246 offers &bull; <code>data/sample_placements.csv</code></p>
+                <a href="/api/admin/sample-files/sample_placements.csv" download class="btn-secondary" style="display:inline-block; margin-top:8px; font-size:11px; padding:5px 12px; text-decoration:none;">Download Placements CSV</a>
+              </div>
+              <div>
+                <span style="font-size:11px; text-transform:uppercase; color:#64748b; font-weight:700;">Complete Dataset JSON</span>
+                <p style="font-size:12px; color:#0f172a; margin-top:3px;">Full dump &bull; <code>data/sample_dataset.json</code></p>
+                <a href="/api/admin/sample-files/sample_dataset.json" download class="btn-secondary" style="display:inline-block; margin-top:8px; font-size:11px; padding:5px 12px; text-decoration:none;">Download Full JSON</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Backup & ZIP Compression Utility -->
+          <div class="card" style="display:flex; flex-direction:column; gap:16px; margin-top:20px; border:1px solid #bae6fd; background:#f0f9ff;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+              <div>
+                <h3 class="card-title" style="font-size:15px; margin-bottom:4px; color:#0369a1;">Project ZIP Compression & Backup</h3>
+                <p class="card-subtitle" style="color:#0284c7;">Compress the entire project into a clean ZIP file without Windows file-locking issues</p>
+              </div>
+              <div>
+                <a href="/api/admin/download-zip" class="btn-primary" style="background:#0284c7; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <span>Download Clean Project ZIP</span>
+                </a>
+              </div>
+            </div>
+            <div style="padding:12px 16px; background:#ffffff; border:1px solid #e0f2fe; border-radius:6px; font-size:12px; color:#334155; line-height:1.6;">
+              <strong>Why did Windows block zipping earlier?</strong> When data is added, Python holds the active SQLite database file open. In Windows Explorer, trying to zip the folder gives a "File In Use" error.
+              <br>&bull; <strong>Solution 1:</strong> Click <strong>"Download Clean Project ZIP"</strong> above to get the full zipped archive instantly.
+              <br>&bull; <strong>Solution 2:</strong> Double-click the included <code>create_zip.bat</code> script inside your project folder anytime!
+              <br>&bull; <strong>Solution 3:</strong> Close the Python server terminal window before right-clicking the folder to zip.
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer (Matching Reference Layout Image 2) -->
+      <footer class="app-footer">
+        <div class="footer-content">
+          <div class="footer-left">
+            <div class="footer-brand">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              <span>Placement Cell</span>
+            </div>
+
+            <span class="footer-divider">|</span>
+
+            <button class="footer-btn" id="footerAboutBtn">About</button>
+            <button class="footer-btn" id="footerHelpBtn">Help</button>
+
+            <span class="footer-divider">|</span>
+
+            <div class="footer-nav-group">
+              <span class="footer-nav-label">Navigate:</span>
+              <button class="footer-nav-link active" data-page="dashboard">Dashboard</button>
+              <button class="footer-nav-link" data-page="students">Students</button>
+              <button class="footer-nav-link" data-page="placements">Placements</button>
+              <button class="footer-nav-link" data-page="manage">Add / Edit Details</button>
+              <button class="footer-nav-link" data-page="departments">Departments</button>
+              <button class="footer-nav-link" data-page="packages">Packages</button>
+              <button class="footer-nav-link" data-page="skills">Skills</button>
+              <button class="footer-nav-link" data-page="settings">Settings</button>
+            </div>
+          </div>
+
+          <div class="footer-right">
+            Placement Cell &middot; B.Tech Analytics Portal
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- MODALS -->
+
+  <!-- Modal: About -->
+  <div class="modal-backdrop" id="modalAbout">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h4 class="modal-title">About Placement Cell Portal</h4>
+        <button class="modal-close" data-close-modal>&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom:12px;">The <strong>Campus Training & Placement Cell Portal</strong> provides statistical transparency and visibility into institutional career outcomes, recruiter partnerships, department placement records, and engineering specialization metrics across graduation batches <strong>2018 through 2026</strong>.</p>
+        <p style="margin-bottom:8px;"><strong>Entities Analyzed:</strong></p>
+        <ul style="padding-left:20px; line-height:1.7;">
+          <li>Students, technical competencies, and eligibility tracking</li>
+          <li>Campus placement offers, recruiters, and salary packages (in LPA)</li>
+          <li>Department and sub-branch comparative statistics</li>
+          <li>Compensation brackets and salary percentiles calculated via NumPy</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" data-close-modal>Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Help -->
+  <div class="modal-backdrop" id="modalHelp">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h4 class="modal-title">Help & Placement Support</h4>
+        <button class="modal-close" data-close-modal>&times;</button>
+      </div>
+      <div class="modal-body" style="display:flex; flex-direction:column; gap:12px;">
+        <div>
+          <strong style="color:#0f172a;">1. How is the Placement Rate calculated?</strong>
+          <p style="color:#64748b; margin-top:2px;"><code>(Unique Eligible Placed Students &divide; Total Eligible Students) &times; 100</code>. Students with multiple job offers are deduplicated so placement rate is accurate.</p>
+        </div>
+        <div>
+          <strong style="color:#0f172a;">2. Sub-Branch Filtering</strong>
+          <p style="color:#64748b; margin-top:2px;">Selecting Computer Science or Electronics & Communication automatically activates the sub-branch filter for specialized tracking.</p>
+        </div>
+        <div>
+          <strong style="color:#0f172a;">3. Training & Placement Office Contact</strong>
+          <p style="color:#64748b; margin-top:2px;">Email: <strong>placement@college.edu</strong> &bull; Office: Block A, Room 204</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" data-close-modal>Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add/Edit Student -->
+  <div class="modal-backdrop" id="modalStudentForm">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h4 class="modal-title" id="studentModalTitle">Add Student Record</h4>
+        <button class="modal-close" data-close-modal>&times;</button>
+      </div>
+      <form id="studentForm">
+        <div class="modal-body" style="display:flex; flex-direction:column; gap:14px;">
+          <input type="hidden" id="studentFormId">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div>
+              <label class="filter-label">Roll Number *</label>
+              <input type="text" id="studentFormRoll" class="form-input" style="width:100%;" required placeholder="e.g. 2026CS001">
+            </div>
+            <div>
+              <label class="filter-label">Student Name *</label>
+              <input type="text" id="studentFormName" class="form-input" style="width:100%;" required placeholder="e.g. Rahul Sharma">
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div>
+              <label class="filter-label">Department *</label>
+              <select id="studentFormDept" class="form-select" style="width:100%;" required></select>
+            </div>
+            <div>
+              <label class="filter-label">Sub-Branch / Specialization</label>
+              <select id="studentFormSubBranch" class="form-select" style="width:100%;"></select>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div>
+              <label class="filter-label">Graduation Batch *</label>
+              <select id="studentFormGradYear" class="form-select" style="width:100%;" required></select>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; padding-top:18px;">
+              <input type="checkbox" id="studentFormEligible" checked style="width:16px; height:16px;">
+              <label for="studentFormEligible" style="font-size:12px; font-weight:600; cursor:pointer;">Eligible for Placement</label>
+            </div>
+          </div>
+
+          <div>
+            <label class="filter-label">Technical Skills (comma-separated)</label>
+            <input type="text" id="studentFormSkills" class="form-input" style="width:100%;" placeholder="e.g. Python, SQL, React, Machine Learning">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" data-close-modal>Cancel</button>
+          <button type="submit" class="btn-primary" id="studentFormSubmitBtn">Save Student</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add/Edit Placement -->
+  <div class="modal-backdrop" id="modalPlacementForm">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h4 class="modal-title" id="placementModalTitle">Add Placement Offer</h4>
+        <button class="modal-close" data-close-modal>&times;</button>
+      </div>
+      <form id="placementForm">
+        <div class="modal-body" style="display:flex; flex-direction:column; gap:14px;">
+          <input type="hidden" id="placementFormId">
+          <div>
+            <label class="filter-label">Student Roll Number *</label>
+            <input type="text" id="placementFormRoll" class="form-input" style="width:100%;" required placeholder="e.g. 2026CS001">
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div>
+              <label class="filter-label">Company Name *</label>
+              <input type="text" id="placementFormCompany" class="form-input" style="width:100%;" required placeholder="e.g. Google, TCS, Microsoft">
+            </div>
+            <div>
+              <label class="filter-label">Job Role *</label>
+              <input type="text" id="placementFormRole" class="form-input" style="width:100%;" required placeholder="e.g. Software Engineer">
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div>
+              <label class="filter-label">Package (LPA) *</label>
+              <input type="number" step="0.01" min="0.1" max="200" id="placementFormPackage" class="form-input" style="width:100%;" required placeholder="e.g. 14.5">
+            </div>
+            <div>
+              <label class="filter-label">Placement Date *</label>
+              <input type="date" id="placementFormDate" class="form-input" style="width:100%;" required>
+            </div>
+          </div>
+
+          <div>
+            <label class="filter-label">Offer Status *</label>
+            <select id="placementFormStatus" class="form-select" style="width:100%;">
+              <option value="Placed">Placed</option>
+              <option value="Offer Accepted">Offer Accepted</option>
+              <option value="Offer Extended">Offer Extended</option>
+              <option value="Joining Confirmed">Joining Confirmed</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" data-close-modal>Cancel</button>
+          <button type="submit" class="btn-primary">Save Offer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toastMessage"></div>
+
+  <!-- Core JavaScript Application & Default Dataset -->
+  <script src="default_data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
